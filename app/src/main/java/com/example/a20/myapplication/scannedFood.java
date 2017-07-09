@@ -7,16 +7,26 @@ import java.net.URL;
  */
 
 public class scannedFood {
+    private String product_name_en;
+    private URL image_url;
+    private String ingredients_text;
+    private String foodIngredients;
+    private String foodImages;
 
     public String getProduct_name_en() {
         return product_name_en;
     }
 
-    private String product_name_en;
-    private URL foodFront;
-    private Float foodCalories;
-    private String foodIngredients;
-    private String foodImages;
+
+    public URL getImage_url() {
+        return image_url;
+    }
+
+    public String getIngredients_text() {
+        return ingredients_text;
+    }
+
+
 
 
 }

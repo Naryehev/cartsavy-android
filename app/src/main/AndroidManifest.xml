@@ -21,8 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityTwo" android:screenOrientation="fullSensor"
-            tools:replace="screenOrientation"> </activity>
+        <activity android:name=".ActivityTwo" android:configChanges="keyboardHidden|orientation|screenSize"> </activity>
 
     </application>
 

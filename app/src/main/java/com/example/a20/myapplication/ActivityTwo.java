@@ -3,10 +3,12 @@ package com.example.a20.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.*;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,6 +33,8 @@ public class ActivityTwo extends AppCompatActivity {
     public scannedFood fooditem;
     private TextView test;
     public String foodName = "broken";
+    private ImageView foodThumb;
+    public URL thumbnail ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,7 @@ public class ActivityTwo extends AppCompatActivity {
         String value1 = intent.getStringExtra("Username");
         String value2 = intent.getStringExtra("Password");
         test = (TextView) findViewById(R.id.test);
+        foodThumb = (ImageView) findViewById(R.id.foodThumb);
 
     }
     public void scanNow(View view){
@@ -66,7 +73,7 @@ public class ActivityTwo extends AppCompatActivity {
             TextView format1 = (TextView) findViewById(R.id.scan_content);
             format1.setText("FORMAT: " + scanFormat);
             TextView content1 = (TextView) findViewById(R.id.scan_content);
-            content1.setText("CONTENT: " + scanContent);
+            content1.setText("Barcode Number: " + scanContent);
 
             try {
                 URL url = new URL("https://world.openfoodfacts.org/api/v0/product/"+ scanContent +".json");
@@ -109,6 +116,10 @@ public class ActivityTwo extends AppCompatActivity {
             }
             fooditem=scanfoods;
             test.setText(fooditem.getProduct_name_en());
+            test.setText(fooditem.getIngredients_text());
+            thumbnail = fooditem.getImage_url();
+            Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);
+
         }
     }
 
