@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityTwo" android:configChanges="keyboardHidden|orientation|screenSize"> </activity>
+        <activity android:name=".ActivityTwo" android:configChanges="keyboardHidden|orientation|screenSize"   android:screenOrientation="portrait"
+            > </activity>
 
     </application>
 

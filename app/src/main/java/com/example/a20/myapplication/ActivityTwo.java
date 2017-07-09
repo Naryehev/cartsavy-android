@@ -32,6 +32,7 @@ import java.nio.charset.Charset;
 public class ActivityTwo extends AppCompatActivity {
     public scannedFood fooditem;
     private TextView test;
+    private TextView nameDis;
     public String foodName = "broken";
     private ImageView foodThumb;
     public URL thumbnail ;
@@ -44,6 +45,7 @@ public class ActivityTwo extends AppCompatActivity {
         String value1 = intent.getStringExtra("Username");
         String value2 = intent.getStringExtra("Password");
         test = (TextView) findViewById(R.id.test);
+        nameDis = (TextView) findViewById(R.id.nameDis);
         foodThumb = (ImageView) findViewById(R.id.foodThumb);
 
     }
@@ -115,8 +117,8 @@ public class ActivityTwo extends AppCompatActivity {
                 return;
             }
             fooditem=scanfoods;
-            test.setText(fooditem.getProduct_name_en());
-            test.setText(fooditem.getIngredients_text());
+            nameDis.setText("Product Name: \n" + fooditem.getProduct_name_en());
+            test.setText("Ingredients: \n" + fooditem.getIngredients_text());
             thumbnail = fooditem.getImage_url();
             Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);
 
