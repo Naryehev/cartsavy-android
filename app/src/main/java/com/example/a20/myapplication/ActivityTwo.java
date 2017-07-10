@@ -7,6 +7,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 
+import static android.R.drawable.dialog_holo_dark_frame;
+
 
 public class ActivityTwo extends AppCompatActivity {
     public scannedFood fooditem;
@@ -36,6 +39,7 @@ public class ActivityTwo extends AppCompatActivity {
     public String foodName = "broken";
     private ImageView foodThumb;
     public URL thumbnail ;
+    public URL invalid ;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +79,6 @@ public class ActivityTwo extends AppCompatActivity {
 
             // display it on screen
             TextView format1 = (TextView) findViewById(R.id.scan_content);
-            format1.setText("FORMAT: " + scanFormat);
             TextView content1 = (TextView) findViewById(R.id.scan_content);
             content1.setText("Barcode Number: " + scanContent);
 
@@ -118,11 +121,23 @@ public class ActivityTwo extends AppCompatActivity {
                 Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show();
                 return;
             }
+            try {
+                invalid = new URL("https://static.openfoodfacts.org/images/products/invalid/front_en.19023.400.jpg");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
             fooditem=scanfoods;
             nameDis.setText("Product Name: \n" + fooditem.getProduct_name_en());
             test.setText("Ingredients: \n" + fooditem.getIngredients_text());
             thumbnail = fooditem.getImage_url();
-            Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);
+            if(thumbnail.equals(invalid)){
+                thumbnail = null;
+
+            }else{
+                Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);
+            }
+
 
         }
     }
