@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-            multiDexEnabled true
+        multiDexEnabled true
 
     }
     buildTypes {
@@ -35,6 +35,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'me.dm7.barcodescanner:zxing:1.9.3'
@@ -42,9 +44,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.journeyapps:zxing-android-embedded:3.5.0'
+    compile 'com.google.firebase:firebase-auth:10.0.1'
     testCompile 'junit:junit:4.12'
-
 }
 
 
@@ -52,3 +53,5 @@ android {
     buildToolsVersion '25.0.0' // Older versions may give compile errors
 }
 
+
+apply plugin: 'com.google.gms.google-services'
