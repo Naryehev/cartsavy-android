@@ -4,9 +4,13 @@
     package="com.example.a20.myapplication">
     <uses-permission android:name="android.permission.CAMERA"  />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="CartSavy"
         android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"

@@ -52,7 +52,7 @@ public class ActivityTwo extends AppCompatActivity {
     public void scanNow(View view){
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-        integrator.setPrompt("Scan a barcode");
+        integrator.setPrompt("Place a barcode inside the viewfinder. Toggle the flashlight with volume + and -");
         integrator.setBeepEnabled(true);
         integrator.setCameraId(0);  // Use a specific camera of the device
         integrator.setOrientationLocked(false);
