@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -8,12 +9,21 @@
     android:background="#F1FAEE">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:padding="40dp"
+        android:paddingBottom="50dp"
+        app:srcCompat="@mipmap/logo" />
+
     <EditText
         android:id="@+id/usernameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="text"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
@@ -38,15 +48,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         />
-    <Button
-        android:id="@+id/fpBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        />
+
     <Button
         android:id="@+id/signupBtn"
         android:layout_width="match_parent"
@@ -56,12 +58,22 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         />
+
+    <Button
+        android:id="@+id/fpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:text="Forgot Password" />
+
     <TextView android:id="@+id/statusNotif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Status"
         android:gravity="center"
-        android:textColor="#ff0000"
+        android:textColor="#006d00"
         android:layout_marginTop="20dp"/>
 
 

@@ -13,6 +13,10 @@ public class scannedFood {
     private String foodIngredients;
     private String foodImages;
 
+
+
+    private String status_verbose;
+
     public String getProduct_name_en() {
         return product_name_en;
     }
@@ -26,6 +30,9 @@ public class scannedFood {
         return ingredients_text;
     }
 
+    public String getStatus_verbose() {
+        return status_verbose;
+    }
 
 
 

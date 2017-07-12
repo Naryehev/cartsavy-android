@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,19 +42,26 @@ public class ActivityTwo extends AppCompatActivity {
     private ImageView foodThumb;
     public URL thumbnail ;
     public URL invalid ;
-
+    public ImageButton scanbtn;
+    public String statusRet;
+    public Boolean statusChk;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
 
-        Intent intent = getIntent();
-        String value1 = intent.getStringExtra("Username");
-        String value2 = intent.getStringExtra("Password");
         test = (TextView) findViewById(R.id.test);
         nameDis = (TextView) findViewById(R.id.nameDis);
         foodThumb = (ImageView) findViewById(R.id.foodThumb);
+        scanbtn = (ImageButton) findViewById(R.id.button2);
+        scanbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                scanNow(v);
+            }
+        });
 
     }
+
     public void scanNow(View view){
         IntentIntegrator integrator = new IntentIntegrator(this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
@@ -131,8 +140,13 @@ public class ActivityTwo extends AppCompatActivity {
             nameDis.setText("Product Name: \n" + fooditem.getProduct_name_en());
             test.setText("Ingredients: \n" + fooditem.getIngredients_text());
             thumbnail = fooditem.getImage_url();
+            statusRet = fooditem.getStatus_verbose();
+            if(statusRet == "product not found"){
+                statusChk = false;
+            }
             if(thumbnail.equals(invalid)){
-                thumbnail = null;
+                foodThumb.setImageResource(R.drawable.ic_logo);
+
 
             }else{
                 Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.LoginFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         mEmailAddy = (EditText) findViewById(R.id.usernameInput);
         mPasswd = (EditText) findViewById(R.id.passwordInput);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
 
-            signIn(mEmailAddy.getText().toString(), mPasswd.getText().toString());
+            signIn(mEmailAddy.getText().toString().trim(), mPasswd.getText().toString());
 
             String userV = mEmailAddy.getText().toString();
                  String passV = mPasswd.getText().toString();
@@ -74,10 +76,14 @@ public class MainActivity extends AppCompatActivity {
     });
         forgotPass.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                forgotPassword(mEmailAddy.getText().toString());
+                forgotPassword(mEmailAddy.getText().toString().trim());
             }
         });
-
+        signUp.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                createAccount(mEmailAddy.getText().toString().trim(), mPasswd.getText().toString());
+            }
+        });
 
     }
     @Override
@@ -98,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
      * @param forgotPassword
      * @return valid boolean whether email and password is inputed.
      */
-    public boolean  validateForm(boolean forgotPassword){
+    private boolean  validateForm(boolean forgotPassword){
         Boolean valid = true;
 
         String email= mEmailAddy.getText().toString();
@@ -156,6 +162,31 @@ public class MainActivity extends AppCompatActivity {
     public static  void signOut(){
         FirebaseAuth.getInstance().signOut();
     }
+    public void createAccount(final String email, String password){
+        Log.d("TAG", "createAccount:"+ email);
+        boolean isForgotPassword = false;
+        if(validateForm(isForgotPassword)){
+            final ProgressDialog dialog = new ProgressDialog(MainActivity.this);
+            dialog.show();
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    Log.d("TAG", "createUserwithEmail:onComplete:" + task.isSuccessful());
+                    if(task.isSuccessful()){
+                        Toast.makeText(MainActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), ActivityTwo.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Invalid email or password." + "Password must have at least 6 Characters",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                }
+            });
+        }
+
+    }
     public  void forgotPassword(String emailAddress){
         boolean isForgotPassword = true;
         if(validateForm(isForgotPassword)){
@@ -176,4 +207,4 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }
-}
+    public void onDestroy()
