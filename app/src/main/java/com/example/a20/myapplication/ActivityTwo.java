@@ -32,16 +32,18 @@ import java.net.URLConnection;
 import java.nio.charset.Charset;
 
 import static android.R.drawable.dialog_holo_dark_frame;
+import static android.R.drawable.ic_menu_help;
 
 
 public class ActivityTwo extends AppCompatActivity {
     public scannedFood fooditem;
+    public scannedFood foodStatus;
     private TextView test;
     private TextView nameDis;
     public String foodName = "broken";
     private ImageView foodThumb;
     public URL thumbnail ;
-    public URL invalid ;
+    public URL invalid;
     public ImageButton scanbtn;
     public String statusRet;
     public Boolean statusChk;
@@ -118,6 +120,7 @@ public class ActivityTwo extends AppCompatActivity {
                 Gson gson = new Gson();
                 results scanfood = gson.fromJson(inStreamReader, results.class);
                 fooditem = scanfood.getProdResults();
+                foodStatus = scanfood.getStatus_Verbose();
                 return scanfood.getProdResults();
 
             } catch(IOException e){
@@ -131,23 +134,19 @@ public class ActivityTwo extends AppCompatActivity {
                 return;
             }
             try {
-                invalid = new URL("https://static.openfoodfacts.org/images/products/invalid/front_en.19023.400.jpg");
+               URL invalid = new URL("https://static.openfoodfacts.org/images/products/invalid/front_en.19023.400.jpg");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
 
             fooditem=scanfoods;
             nameDis.setText("Product Name: \n" + fooditem.getProduct_name_en());
-            test.setText("Ingredients: \n" + fooditem.getIngredients_text());
+            test.setText( fooditem.getIngredients_text());
             thumbnail = fooditem.getImage_url();
-            statusRet = fooditem.getStatus_verbose();
-            if(statusRet == "product not found"){
-                statusChk = false;
-            }
-            if(thumbnail.equals(invalid)){
+
+            if(thumbnail == null){
                 foodThumb.setImageResource(R.drawable.ic_logo);
-
-
+                return;
             }else{
                 Picasso.with(context).load(String.valueOf(thumbnail)).into(foodThumb);
             }
