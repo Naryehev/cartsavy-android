@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent myIntent = new Intent(getApplicationContext(), ActivityTwo.class);
                                 startActivity(myIntent);
                                 finish();
-
+                                dialog.dismiss();
                             }else{
                                 Log.w("TAG", "signInWithEmail:failed", task.getException());
                                 Toast.makeText(MainActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
@@ -207,4 +207,5 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }
-    public void onDestroy()
+
+}
