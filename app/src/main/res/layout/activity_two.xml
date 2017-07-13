@@ -15,7 +15,6 @@
         android:contentDescription="Item Thumbnail"
         android:scaleType="fitXY"
         app:srcCompat="@android:drawable/dialog_holo_dark_frame"
-        tools:layout_editor_absoluteX="8dp"
         android:layout_alignTop="@+id/scan_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -36,18 +35,20 @@
         android:id="@+id/test"
         android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_below="@+id/foodThumb"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingredients"
-        android:layout_below="@+id/foodThumb"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="19dp" />
+        android:layout_below="@+id/foodThumb"
+        android:layout_marginTop="19dp"
+        android:text="Ingredients :" />
 
     <TextView
         android:id="@+id/nameDis"
@@ -56,8 +57,6 @@
         android:text=""
         android:hint="Product Name:"
         android:layout_marginTop="22dp"
-        android:layout_marginLeft="7dp"
-        android:layout_marginStart="7dp"
         android:layout_below="@+id/scan_content"
         android:layout_alignLeft="@+id/scan_content"
         android:layout_alignStart="@+id/scan_content" />
@@ -69,22 +68,45 @@
         android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Search"
+        android:hint="Search"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="17dp" />
 
     <ImageButton
-        android:id="@+id/button2"
-        android:layout_width="70dp"
+        android:id="@+id/saveButton"
+        android:layout_width="100dp"
         android:layout_height="50dp"
+        android:layout_alignLeft="@+id/nameDis"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/nameDis"
+        android:layout_marginBottom="62dp"
         android:background="#e85f5c"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:layout_marginRight="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_alignTop="@+id/editText"
+        android:elevation="10dp"
+        app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ImageButton
+        android:id="@+id/scanButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/editText"
+        android:background="#e85f5c"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/viewlist"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/saveButton"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:background="#e85f5c"
+        android:text="View List"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

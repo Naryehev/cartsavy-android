@@ -1,31 +1,26 @@
 package com.example.a20.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 /**
- * Created by 20 on 7/11/2017.
+ * Created by 20 on 7/12/2017.
  */
 
-public class splashActivity  extends AppCompatActivity {
-    private Button b1;
+public class SplashActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_activity);
+        SystemClock.sleep(1500);
 
-        b1 = (Button) findViewById(R.id.loginBtn);
-        b1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-
-            }
-        });
-
-
+        Intent intent = new Intent(this, MainActivity.class);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        startActivity(intent);
+        finish();
     }
 }

@@ -10,11 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.stream.JsonReader;
@@ -42,23 +45,61 @@ public class ActivityTwo extends AppCompatActivity {
     private TextView nameDis;
     public String foodName = "broken";
     private ImageView foodThumb;
-    public URL thumbnail ;
+    public String thumbnail ;
     public URL invalid;
     public ImageButton scanbtn;
     public String statusRet;
     public Boolean statusChk;
+    public ImageView saveBtn;
+    public Button viewList;
+    private DatabaseReference mDatabase;
+    public String pushingurl;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_two);
+        String username ="";
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        username = user.getUid();
+        mDatabase = FirebaseDatabase.getInstance().getReference(username);
 
         test = (TextView) findViewById(R.id.test);
         nameDis = (TextView) findViewById(R.id.nameDis);
         foodThumb = (ImageView) findViewById(R.id.foodThumb);
-        scanbtn = (ImageButton) findViewById(R.id.button2);
+        scanbtn = (ImageButton) findViewById(R.id.scanButton);
+        saveBtn = (ImageButton) findViewById(R.id.saveButton);
+        viewList = (Button) findViewById(R.id.viewlist);
         scanbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 scanNow(v);
+            }
+        });
+        viewList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(getApplicationContext(), fridgeActivity.class);
+                startActivity(intent);
+            }
+        });
+        saveBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+               if(fooditem != null) {
+                    String id = mDatabase.push().getKey();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    fooditem.setUser(user.getEmail());
+                    fooditem.setId(id);
+                    String test = fooditem.getProduct_name_en();
+                    mDatabase.child(id).setValue(fooditem);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "No item found.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 

@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 // ...
             }
         };
-        FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
 
         b1.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
