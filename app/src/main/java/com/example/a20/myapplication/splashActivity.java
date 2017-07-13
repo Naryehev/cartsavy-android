@@ -16,11 +16,12 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SystemClock.sleep(1500);
+        SystemClock.sleep(2000);
 
         Intent intent = new Intent(this, MainActivity.class);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
         finish();
     }
 }
